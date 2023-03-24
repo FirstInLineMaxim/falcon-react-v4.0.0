@@ -1,5 +1,7 @@
 import Weather from 'components/dashboards/default/Weather';
 import React, { useContext, useEffect } from 'react';
+import { Button, InputGroup } from 'react-bootstrap';
+import { FormControl } from 'react-bootstrap/esm';
 import { WeatherContext } from './context/Context';
 // const weather = {
 //   city: 'New York City',
@@ -46,6 +48,17 @@ export default function WeatherApp() {
   console.log(weatherState);
   return (
     <>
+      <InputGroup className="mb-3">
+        <FormControl
+          placeholder="City"
+          aria-label="City"
+          aria-describedby="basic-addon2"
+          onSubmit={console.log('submited')}
+        />
+        <Button type="submit" variant="outline-info" id="button-addon2">
+          Button
+        </Button>
+      </InputGroup>
       <Weather data={weatherState} />
     </>
   );
