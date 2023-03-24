@@ -16,6 +16,7 @@ export default function WeatherApp() {
         `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${weatherApiKey}`
       );
       const [json] = await data.json();
+      console.log(json);
       const props = {
         city: json.name,
         lat: json.lat,
@@ -26,6 +27,7 @@ export default function WeatherApp() {
       console.error(error);
     }
   }
+
   async function getWeather({ lat, lon, city }) {
     try {
       const data = await fetch(
@@ -46,6 +48,7 @@ export default function WeatherApp() {
       console.error(error);
     }
   }
+
   async function submitNewCity(city) {
     console.log(city);
     if (city === '') {
