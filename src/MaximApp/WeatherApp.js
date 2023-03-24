@@ -1,6 +1,6 @@
 import Weather from 'components/dashboards/default/Weather';
 import React, { useContext, useRef } from 'react';
-import { Button, InputGroup } from 'react-bootstrap';
+import { Button, Col, Container, InputGroup, Row } from 'react-bootstrap';
 import { FormControl, Stack } from 'react-bootstrap/esm';
 import { WeatherContext } from './context/Context';
 import { ADD_CITY } from './redux_types/weatherTypes';
@@ -95,17 +95,21 @@ export default function WeatherApp() {
           ADD
         </Button>
       </InputGroup>
-      <Stack gap={3}>
-        {weatherState.map((ele, i) => (
-          <Weather
-            key={i}
-            data={ele}
-            WeatherItems={
-              <Dropdown.Item className="text-danger">Remove</Dropdown.Item>
-            }
-          />
-        ))}
-      </Stack>
+      <Container fluid>
+        <Row>
+          {weatherState.map((ele, i) => (
+            <Col key={1} md={6}>
+              <Weather
+                key={i}
+                data={ele}
+                WeatherItems={
+                  <Dropdown.Item className="text-danger">Remove</Dropdown.Item>
+                }
+              />
+            </Col>
+          ))}
+        </Row>
+      </Container>
     </>
   );
 }
