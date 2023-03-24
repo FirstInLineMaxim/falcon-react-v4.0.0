@@ -1,10 +1,14 @@
+import WeatherProvider from 'MaximApp/components/WeatherProvider';
+import WeatherApp from 'MaximApp/WeatherApp';
 import React from 'react';
 const Starter = () => {
-  const weatherApiKey = process.env.OPEN_WEATHER_API_KEY;
-const getWeather(){
-  
-}
-  return <></>;
+  return (
+    <>
+      <WeatherProvider>
+        <WeatherApp />
+      </WeatherProvider>
+    </>
+  );
 };
 
 export default Starter;
