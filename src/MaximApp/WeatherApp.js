@@ -52,7 +52,9 @@ export default function WeatherApp() {
     if (city === '') {
       console.log('first');
       return toast(
-        <span className="text-warning">Please enter a city First!</span>
+        <span className="text-info text-center">
+          Please enter a city First!
+        </span>
       );
     }
     try {
