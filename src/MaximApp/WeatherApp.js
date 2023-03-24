@@ -96,7 +96,7 @@ export default function WeatherApp() {
         </Button>
       </InputGroup>
       <Container fluid>
-        <Row>
+        <Row className="g-3">
           {weatherState.map((ele, i) => (
             <Col key={1} md={6}>
               <Weather
