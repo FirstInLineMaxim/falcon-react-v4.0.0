@@ -46,7 +46,8 @@ export default function WeatherApp() {
         precipitation: json.main.humidity,
         temperature: json.main.temp,
         highestTemperature: json.main.temp_max,
-        lowestTemperature: json.main.temp_min
+        lowestTemperature: json.main.temp_min,
+        icon: json.weather[0].icon
       };
       return newWeather;
     } catch (error) {
@@ -56,8 +57,8 @@ export default function WeatherApp() {
   async function submitNewCity(city) {
     try {
       const data = await getCord(city);
-      console.log(data);
-      const newWeather = await getWeather(data);
+      !data %% <Toast
+      const newWeather = data && (await getWeather(data));
 
       weatherDispatch({ type: ADD_CITY, payload: newWeather });
     } catch (error) {

@@ -13,7 +13,8 @@ const Weather = ({
     precipitation,
     temperature,
     highestTemperature,
-    lowestTemperature
+    lowestTemperature,
+    icon
   },
   ...rest
 }) => (
@@ -28,7 +29,16 @@ const Weather = ({
     <Card.Body className="pt-2">
       <Row className="g-0 h-100 align-items-center">
         <Col as={Flex} alignItems="center">
-          <img className="me-3" src={weatherIcon} alt="" height="60" />
+          <img
+            className="me-3"
+            src={
+              icon
+                ? `https://openweathermap.org/img/wn/${icon}@2x.png`
+                : weatherIcon
+            }
+            alt=""
+            height="60"
+          />
           <div>
             <h6 className="mb-2">{city}</h6>
             <div className="fs--2 fw-semi-bold">
