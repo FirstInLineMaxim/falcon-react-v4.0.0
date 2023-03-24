@@ -6,6 +6,7 @@ import { WeatherContext } from './context/Context';
 import { ADD_CITY } from './redux_types/weatherTypes';
 import { toast } from 'react-toastify';
 import { Dropdown } from 'react-bootstrap';
+
 export default function WeatherApp() {
   const cityInput = useRef();
   const weatherApiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
@@ -50,7 +51,6 @@ export default function WeatherApp() {
   }
 
   async function submitNewCity(city) {
-    console.log(city);
     if (city === '') {
       console.log('first');
       return toast(
