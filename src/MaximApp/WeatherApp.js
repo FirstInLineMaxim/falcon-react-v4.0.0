@@ -5,14 +5,7 @@ import { Col, FormControl, Row, Stack } from 'react-bootstrap/esm';
 import Container from 'react-bootstrap/Container';
 import { WeatherContext } from './context/Context';
 import { ADD_CITY } from './redux_types/weatherTypes';
-// const weather = {
-//   city: 'New York City',
-//   condition: 'Sunny',
-//   precipitation: '50%',
-//   temperature: 31,
-//   highestTemperature: 32,
-//   lowestTemperature: 25
-// };
+import { toast } from 'react-toastify';
 export default function WeatherApp() {
   const cityInput = useRef();
   const weatherApiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
@@ -55,9 +48,22 @@ export default function WeatherApp() {
     }
   }
   async function submitNewCity(city) {
+    console.log(city);
+    if (city === '') {
+      console.log('first');
+      return toast(
+        <span className="text-warning">Please enter a city First!</span>
+      );
+    }
     try {
       const data = await getCord(city);
-      !data %% <Toast
+      if (!data) {
+        return toast(
+          <span className="text-warning">
+            Seems like this city doesnt Exsist!
+          </span>
+        );
+      }
       const newWeather = data && (await getWeather(data));
 
       weatherDispatch({ type: ADD_CITY, payload: newWeather });

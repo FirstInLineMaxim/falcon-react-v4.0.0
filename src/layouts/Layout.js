@@ -628,9 +628,16 @@ const Layout = () => {
       <SettingsToggle />
       <SettingsPanel />
       <ToastContainer
-        closeButton={CloseButton}
-        icon={false}
-        position={toast.POSITION.BOTTOM_LEFT}
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
       />
     </>
   );
