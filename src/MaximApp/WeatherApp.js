@@ -1,12 +1,11 @@
 import Weather from 'components/dashboards/default/Weather';
 import React, { useContext, useRef } from 'react';
 import { Button, InputGroup } from 'react-bootstrap';
-import { Col, FormControl, Row, Stack } from 'react-bootstrap/esm';
-import Container from 'react-bootstrap/Container';
+import { FormControl, Stack } from 'react-bootstrap/esm';
 import { WeatherContext } from './context/Context';
 import { ADD_CITY } from './redux_types/weatherTypes';
 import { toast } from 'react-toastify';
-import { Dropdown } from 'bootstrap';
+import { Dropdown } from 'react-bootstrap';
 export default function WeatherApp() {
   const cityInput = useRef();
   const weatherApiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
@@ -17,7 +16,6 @@ export default function WeatherApp() {
         `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${weatherApiKey}`
       );
       const [json] = await data.json();
-      console.log(json);
       const props = {
         city: json.name,
         lat: json.lat,
