@@ -16,6 +16,7 @@ const Weather = ({
     lowestTemperature,
     icon
   },
+  WeatherItems,
   ...rest
 }) => (
   <Card {...rest} className="h-100">
@@ -24,7 +25,13 @@ const Weather = ({
       light={false}
       titleTag="h6"
       className="pb-0"
-      endEl={<CardDropdown />}
+      endEl={
+        WeatherItems ? (
+          <CardDropdown>{WeatherItems}</CardDropdown>
+        ) : (
+          <CardDropdown />
+        )
+      }
     />
     <Card.Body className="pt-2">
       <Row className="g-0 h-100 align-items-center">
@@ -62,6 +69,7 @@ const Weather = ({
 
 Weather.propTypes = {
   data: PropTypes.object.isRequired,
+  WeatherItems: PropTypes.object,
   className: PropTypes.string
 };
 

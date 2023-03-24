@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import { WeatherContext } from './context/Context';
 import { ADD_CITY } from './redux_types/weatherTypes';
 import { toast } from 'react-toastify';
+import { Dropdown } from 'bootstrap';
 export default function WeatherApp() {
   const cityInput = useRef();
   const weatherApiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
@@ -87,15 +88,21 @@ export default function WeatherApp() {
         <Button
           onClick={() => submitNewCity(cityInput.current.value)}
           type="submit"
-          variant="outline-info"
+          variant="info"
           id="button-addon2"
         >
-          Button
+          ADD
         </Button>
       </InputGroup>
       <Stack gap={3}>
         {weatherState.map((ele, i) => (
-          <Weather key={i} data={ele} />
+          <Weather
+            key={i}
+            data={ele}
+            WeatherItems={
+              <Dropdown.Item className="text-danger">Remove</Dropdown.Item>
+            }
+          />
         ))}
       </Stack>
     </>
