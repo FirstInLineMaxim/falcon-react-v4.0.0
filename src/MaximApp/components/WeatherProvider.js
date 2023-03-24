@@ -5,14 +5,7 @@ import { weatherReducer } from 'MaximApp/reducers/weatherReducer';
 import { WeatherContext } from 'MaximApp/context/Context';
 
 const WeatherProvider = ({ children }) => {
-  const initData = {
-    city: 'New York City',
-    condition: 'Sunny',
-    precipitation: '50%',
-    temperature: 31,
-    highestTemperature: 32,
-    lowestTemperature: 25
-  }; //Redux State
+  const initData = []; //Redux State
   const [weatherState, weatherDispatch] = useReducer(weatherReducer, initData); //Redux Dispatch
 
   return (
