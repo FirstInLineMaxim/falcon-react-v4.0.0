@@ -6,7 +6,6 @@ import AppContext from 'context/Context';
 import Logo from 'components/common/Logo';
 import NavbarTopDropDownMenus from 'components/navbar/top/NavbarTopDropDownMenus';
 import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
-import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
 import TopNavRightSideNavItem from 'components/navbar/top/TopNavRightSideNavItem';
 const AppNavBar = () => {
   const {

@@ -13,6 +13,7 @@ import { capitalize } from 'helpers/utils';
 import NavbarTopDropDownMenus from 'components/navbar/top/NavbarTopDropDownMenus';
 import PurchaseCard from 'components/navbar/vertical/PurchaseCard';
 import bgNavbar from 'assets/img/generic/bg-navbar.png';
+import AppIcon from './common/AppIcon';
 
 const AppNavbarVertical = () => {
   const {
@@ -74,7 +75,7 @@ const AppNavbarVertical = () => {
     >
       <Flex alignItems="center">
         <ToggleButton />
-        <Logo at="navbar-vertical" width={40} />
+        <AppIcon at="navbar-vertical" width={80} />
       </Flex>
       <Navbar.Collapse
         in={showBurgerMenu}
