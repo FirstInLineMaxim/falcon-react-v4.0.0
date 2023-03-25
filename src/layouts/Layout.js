@@ -200,6 +200,7 @@ import ContactDetails from 'components/app/support-desk/contact-details/ContactD
 import TicketsPreview from 'components/app/support-desk/tickets-preview/TicketsPreview';
 import QuickLinks from 'components/app/support-desk/quick-links/QuickLinks';
 import Reports from 'components/app/support-desk/reports/Reports';
+import MaximApp from 'MaximApp/MaximApp';
 
 const Layout = () => {
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
@@ -620,13 +621,12 @@ const Layout = () => {
         {/* //--- MainLayout end  */}
 
         {/* App Maxim */}
-
         {/* App Maxim End */}
         {/* <Navigate to="/errors/404" /> */}
         <Route path="*" element={<Navigate to="/errors/404" replace />} />
       </Routes>
-      <SettingsToggle />
-      <SettingsPanel />
+      {/* <SettingsToggle />
+      <SettingsPanel /> */}
       <ToastContainer
         position="bottom-center"
         autoClose={5000}

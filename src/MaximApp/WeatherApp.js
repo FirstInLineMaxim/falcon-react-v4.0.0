@@ -1,7 +1,7 @@
 import Weather from 'components/dashboards/default/Weather';
 import React, { useContext, useRef } from 'react';
 import { Button, Col, Container, InputGroup, Row } from 'react-bootstrap';
-import { FormControl, Stack } from 'react-bootstrap/esm';
+import { FormControl } from 'react-bootstrap/esm';
 import { WeatherContext } from './context/Context';
 import { ADD_CITY } from './redux_types/weatherTypes';
 import { toast } from 'react-toastify';
@@ -11,13 +11,13 @@ export default function WeatherApp() {
   const cityInput = useRef();
   const weatherApiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
   const { weatherState, weatherDispatch } = useContext(WeatherContext);
+  //Fetch to get city Name,lat,lon
   async function getCord(city) {
     try {
       const data = await fetch(
         `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${weatherApiKey}`
       );
       const [json] = await data.json();
-      console.log(json);
       const props = {
         city: json.name,
         lat: json.lat,
