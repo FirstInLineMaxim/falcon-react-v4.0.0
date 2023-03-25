@@ -3,13 +3,16 @@ import MaximLanding from 'MaximApp/pages/MaximLanding';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import AppMainLayout from './AppMainLayout';
 
 export default function MaximLayout() {
   return (
     <>
       <Routes>
         <Route path="/" element={<MaximLanding />} />
-        <Route path="App" element={<Starter />} />
+        <Route element={<AppMainLayout />}>
+          <Route path="weather" element={<Starter />} />
+        </Route>
       </Routes>
 
       <ToastContainer

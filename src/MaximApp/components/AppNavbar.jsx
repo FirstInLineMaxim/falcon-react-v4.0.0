@@ -1,28 +1,142 @@
-import React from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-export function AppNavbar() {
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import { Navbar, Nav } from 'react-bootstrap';
+import classNames from 'classnames';
+import AppContext from 'context/Context';
+import Logo from 'components/common/Logo';
+import NavbarTopDropDownMenus from 'components/navbar/top/NavbarTopDropDownMenus';
+import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
+import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
+import TopNavRightSideNavItem from 'components/navbar/top/TopNavRightSideNavItem';
+const AppNavBar = () => {
+  const {
+    config: { showBurgerMenu, navbarPosition, navbarCollapsed },
+    setConfig
+  } = useContext(AppContext);
+
+  const [showDropShadow, setShowDropShadow] = useState(false);
+
+  const handleBurgerMenu = () => {
+    (navbarPosition === 'top' || navbarPosition === 'double-top') &&
+      setConfig('navbarCollapsed', !navbarCollapsed);
+    (navbarPosition === 'vertical' || navbarPosition === 'combo') &&
+      setConfig('showBurgerMenu', !showBurgerMenu);
+  };
+
+  const setDropShadow = () => {
+    const el = document.documentElement;
+    if (el.scrollTop > 0) {
+      setShowDropShadow(true);
+    } else {
+      setShowDropShadow(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', setDropShadow);
+    return () => window.removeEventListener('scroll', setDropShadow);
+  }, []);
+
+  const burgerMenuRef = useRef();
+
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+    <Navbar
+      className={classNames('navbar-glass fs--1 navbar-top sticky-kit', {
+        // 'navbar-glass-shadow': showDropShadow
+        'navbar-glass-shadow': showDropShadow && !isChat
+      })}
+      expand={
+        navbarPosition === 'top' ||
+        navbarPosition === 'combo' ||
+        navbarPosition === 'double-top'
+          ? topNavbarBreakpoint
+          : true
+      }
+    >
+      {navbarPosition === 'double-top' ? (
+        <div className="w-100">
+          <div className="d-flex flex-between-center">
+            <NavbarTopElements
+              navbarCollapsed={navbarCollapsed}
+              navbarPosition={navbarPosition}
+              handleBurgerMenu={handleBurgerMenu}
+              burgerMenuRef={burgerMenuRef}
+            />
+          </div>
+          <hr className="my-2 d-none d-lg-block" />
+          <Navbar.Collapse in={navbarCollapsed} className="scrollbar py-2">
+            <Nav navbar>
+              <NavbarTopDropDownMenus />
+            </Nav>
+          </Navbar.Collapse>
+        </div>
+      ) : (
+        <NavbarTopElements
+          navbarCollapsed={navbarCollapsed}
+          navbarPosition={navbarPosition}
+          handleBurgerMenu={handleBurgerMenu}
+          burgerMenuRef={burgerMenuRef}
+        />
+      )}
     </Navbar>
   );
-}
+};
+
+const NavbarTopElements = ({
+  navbarPosition,
+  handleBurgerMenu,
+  navbarCollapsed
+}) => {
+  const burgerMenuRef = useRef();
+  return (
+    <>
+      <Navbar.Toggle
+        ref={burgerMenuRef}
+        className={classNames('toggle-icon-wrapper me-md-3 me-2', {
+          'd-lg-none':
+            navbarPosition === 'top' || navbarPosition === 'double-top',
+          [`d-${navbarBreakPoint}-none`]:
+            navbarPosition === 'vertical' || navbarPosition === 'combo'
+        })}
+        as="div"
+      >
+        <button
+          className="navbar-toggler-humburger-icon btn btn-link d-flex flex-center"
+          onClick={handleBurgerMenu}
+          id="burgerMenu"
+        >
+          <span className="navbar-toggle-icon">
+            <span className="toggle-line" />
+          </span>
+        </button>
+      </Navbar.Toggle>
+
+      <Logo at="navbar-top" width={40} id="topLogo" />
+
+      {navbarPosition === 'top' || navbarPosition === 'combo' ? (
+        <Navbar.Collapse
+          in={navbarCollapsed}
+          className="scrollbar pb-3 pb-lg-0"
+        >
+          <Nav navbar>
+            <NavbarTopDropDownMenus />
+          </Nav>
+        </Navbar.Collapse>
+      ) : (
+        <Nav
+          navbar
+          className={`align-items-center d-none d-${topNavbarBreakpoint}-block`}
+          as="ul"
+        ></Nav>
+      )}
+      <TopNavRightSideNavItem />
+    </>
+  );
+};
+
+NavbarTopElements.propTypes = {
+  navbarPosition: PropTypes.string,
+  handleBurgerMenu: PropTypes.func,
+  navbarCollapsed: PropTypes.bool
+};
+export default AppNavBar;
