@@ -1,8 +1,7 @@
 import Weather from 'components/dashboards/default/Weather';
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button, Col, Container, InputGroup, Row } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap/esm';
-import { WeatherContext } from './context/Context';
 import { ADD_CITY, REMOVE_CITY } from './redux_types/weatherTypes';
 import { toast } from 'react-toastify';
 import { Dropdown } from 'react-bootstrap';

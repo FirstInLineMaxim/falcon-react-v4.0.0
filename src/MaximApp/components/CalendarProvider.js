@@ -1,26 +1,16 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import { CalendarContext } from 'MaximApp/context/Context';
 import { calendarReducer } from 'MaximApp/reducers/calendarReducer';
 
-const CalendarProvider = ({ children }) => {
-  const initData = []; //Redux State
-  const [calendarState, calendarDispatch] = useReducer(
-    calendarReducer,
-    initData
-  ); //Redux Dispatch
+//Redux
+import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Provider } from 'react-redux';
+const store = createStore(calendarReducer, composeWithDevTools());
 
-  return (
-    <CalendarContext.Provider
-      value={{
-        calendarState,
-        calendarDispatch
-      }}
-    >
-      {children}
-    </CalendarContext.Provider>
-  );
+const CalendarProvider = ({ children }) => {
+  return <Provider store={store}>{children}</Provider>;
 };
 //children validation
 CalendarProvider.propTypes = {

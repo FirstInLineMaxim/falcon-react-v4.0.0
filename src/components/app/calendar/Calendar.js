@@ -19,10 +19,12 @@ import AddScheduleModal from './AddScheduleModal';
 import CalendarEventModal from './CalendarEventModal';
 import DropdownFilter from 'components/common/DropdownFilter';
 import AppContext from 'context/Context';
-import { CalendarContext } from 'MaximApp/context/Context';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Calendar = () => {
-  const { calendarState, calendarDispatch } = useContext(CalendarContext);
+  const calendarState = useSelector(state => state);
+  const calendarDispatch = useDispatch();
   const {
     config: { isRTL }
   } = useContext(AppContext);

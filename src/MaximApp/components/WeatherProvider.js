@@ -1,10 +1,13 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { createStore } from 'redux';
+
+//Redux
 import { weatherReducer } from 'MaximApp/reducers/weatherReducer';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 const store = createStore(weatherReducer, composeWithDevTools());
+
 const WeatherProvider = ({ children }) => {
   return <Provider store={store}>{children}</Provider>;
 };
