@@ -1,22 +1,27 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-
-import { weatherReducer } from 'MaximApp/reducers/weatherReducer';
-import { WeatherContext } from 'MaximApp/context/Context';
-
+import { createStore } from 'redux';
+import {
+  rootWeatherReducer,
+  weatherReducer
+} from 'MaximApp/reducers/weatherReducer';
+// import { WeatherContext } from 'MaximApp/context/Context';
+import { Provider } from 'react-redux';
+const initData = []; //Redux State
+const store = createStore(weatherReducer);
 const WeatherProvider = ({ children }) => {
-  const initData = []; //Redux State
   const [weatherState, weatherDispatch] = useReducer(weatherReducer, initData); //Redux Dispatch
 
   return (
-    <WeatherContext.Provider
-      value={{
-        weatherState,
-        weatherDispatch
-      }}
+    <Provider
+      store={store}
+      // value={{
+      //   weatherState,
+      //   weatherDispatch
+      // }}
     >
       {children}
-    </WeatherContext.Provider>
+    </Provider>
   );
 };
 //children validation

@@ -14,7 +14,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
-import events from 'data/calendar/events';
+// import events from 'data/calendar/events';
 import AddScheduleModal from './AddScheduleModal';
 import CalendarEventModal from './CalendarEventModal';
 import DropdownFilter from 'components/common/DropdownFilter';
@@ -61,8 +61,7 @@ const Calendar = () => {
     }
   };
 
-  const [initialEvents, setInitialEvents] = useState(eventList);
-  console.log(initialEvents);
+  // const [initialEvents, setInitialEvents] = useState(eventList); //OLD EVENTS need to change const eventList = events.reduce instead
 
   const viewName = [
     'Month View',
@@ -210,7 +209,7 @@ const Calendar = () => {
             }}
             eventTimeFormat={eventTimeFormat}
             eventClick={handleEventClick}
-            events={initialEvents}
+            events={eventList}
           />
         </Card.Body>
       </Card>
@@ -218,7 +217,7 @@ const Calendar = () => {
       <AddScheduleModal
         isOpenScheduleModal={isOpenScheduleModal}
         setIsOpenScheduleModal={setIsOpenScheduleModal}
-        initialEvents={initialEvents}
+        initialEvents={eventList}
         calendarDispatch={calendarDispatch}
         scheduleStartDate={scheduleStartDate}
         scheduleEndDate={scheduleEndDate}

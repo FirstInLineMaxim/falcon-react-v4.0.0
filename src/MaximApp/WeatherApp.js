@@ -6,11 +6,15 @@ import { WeatherContext } from './context/Context';
 import { ADD_CITY, REMOVE_CITY } from './redux_types/weatherTypes';
 import { toast } from 'react-toastify';
 import { Dropdown } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 export default function WeatherApp() {
   const cityInput = useRef();
   const weatherApiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
-  const { weatherState, weatherDispatch } = useContext(WeatherContext);
+  // const { weatherState, weatherDispatch } = useContext(WeatherContext);
+  const weatherState = useSelector(state => state);
+  const weatherDispatch = useDispatch();
   //Fetch to get city Name,lat,lon
   async function getCord(city) {
     try {
