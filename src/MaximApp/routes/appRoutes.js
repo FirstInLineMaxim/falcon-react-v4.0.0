@@ -8,10 +8,11 @@ const appRoutes = {
       icon: 'rocket',
       children: [
         {
-          name: 'Dashboard',
+          name: 'Calendar',
           to: '/dashboard',
           exact: true,
-          active: true
+          active: true,
+          icon: 'calendar-alt'
         },
         {
           name: 'Weather',

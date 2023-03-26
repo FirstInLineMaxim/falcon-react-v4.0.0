@@ -5,13 +5,13 @@ import { Nav, Navbar, Row, Col } from 'react-bootstrap';
 import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
 import AppContext from 'context/Context';
 import Flex from 'components/common/Flex';
-import Logo from 'components/common/Logo';
+// import Logo from 'components/common/Logo';
 import NavbarVerticalMenu from 'components/navbar/vertical/NavbarVerticalMenu';
 import ToggleButton from 'components/navbar/vertical/ToggleButton';
 import routes from 'MaximApp/routes/appRoutes';
 import { capitalize } from 'helpers/utils';
 import NavbarTopDropDownMenus from 'components/navbar/top/NavbarTopDropDownMenus';
-import PurchaseCard from 'components/navbar/vertical/PurchaseCard';
+// import PurchaseCard from 'components/navbar/vertical/PurchaseCard';
 import bgNavbar from 'assets/img/generic/bg-navbar.png';
 import AppIcon from './common/AppIcon';
 
@@ -111,7 +111,7 @@ const AppNavbarVertical = () => {
                 </Nav>
               </div>
             )}
-            <PurchaseCard />
+            {/* <PurchaseCard /> */}
           </>
         </div>
       </Navbar.Collapse>
