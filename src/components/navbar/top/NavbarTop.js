@@ -10,6 +10,7 @@ import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
 import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router-dom';
+import AppIcon from 'MaximApp/components/common/AppIcon';
 
 const NavbarTop = () => {
   const {
@@ -117,7 +118,7 @@ const NavbarTopElements = ({
         </button>
       </Navbar.Toggle>
 
-      <Logo at="navbar-top" width={40} id="topLogo" />
+      <AppIcon at="navbar-top" width={80} id="topLogo" />
 
       {navbarPosition === 'top' || navbarPosition === 'combo' ? (
         <Navbar.Collapse
