@@ -6,11 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import AppContext from 'context/Context';
 import DatePicker from 'react-datepicker';
+import { ADD_EVENT } from 'MaximApp/redux_types/calendarTypes';
 
 const AddScheduleModal = ({
   setIsOpenScheduleModal,
   isOpenScheduleModal,
-  setInitialEvents,
+  calendarDispatch,
   initialEvents,
   scheduleStartDate,
   setScheduleStartDate,
@@ -34,7 +35,10 @@ const AddScheduleModal = ({
   };
   const handleSubmit = e => {
     e.preventDefault();
-    setInitialEvents([...initialEvents, { id: uuid(), ...formData }]);
+    calendarDispatch({
+      type: ADD_EVENT,
+      payload: [...initialEvents, { id: uuid(), ...formData }]
+    });
     setIsOpenScheduleModal(false);
   };
 

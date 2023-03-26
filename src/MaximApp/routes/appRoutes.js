@@ -8,8 +8,8 @@ const appRoutes = {
       icon: 'rocket',
       children: [
         {
-          name: 'LandingPage',
-          to: '/',
+          name: 'Dashboard',
+          to: '/dashboard',
           exact: true,
           active: true
         },

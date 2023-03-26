@@ -31,7 +31,7 @@ const AppMainLayout = () => {
   }, [pathname]);
 
   return (
-    <div className={isFluid ? 'container-fluid' : 'container'}>
+    <div className={'container'}>
       {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (
         <AppNavbarVertical />
       )}

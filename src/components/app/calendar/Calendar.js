@@ -19,8 +19,10 @@ import AddScheduleModal from './AddScheduleModal';
 import CalendarEventModal from './CalendarEventModal';
 import DropdownFilter from 'components/common/DropdownFilter';
 import AppContext from 'context/Context';
+import { CalendarContext } from 'MaximApp/context/Context';
 
 const Calendar = () => {
+  const { calendarState, calendarDispatch } = useContext(CalendarContext);
   const {
     config: { isRTL }
   } = useContext(AppContext);
@@ -34,7 +36,7 @@ const Calendar = () => {
   const [scheduleStartDate, setScheduleStartDate] = useState();
   const [scheduleEndDate, setScheduleEndDate] = useState();
 
-  const eventList = events.reduce(
+  const eventList = calendarState.reduce(
     (acc, event) =>
       event.schedules
         ? acc.concat(event.schedules.concat(event))
@@ -60,6 +62,8 @@ const Calendar = () => {
   };
 
   const [initialEvents, setInitialEvents] = useState(eventList);
+  console.log(initialEvents);
+
   const viewName = [
     'Month View',
     'Week View',
@@ -215,7 +219,7 @@ const Calendar = () => {
         isOpenScheduleModal={isOpenScheduleModal}
         setIsOpenScheduleModal={setIsOpenScheduleModal}
         initialEvents={initialEvents}
-        setInitialEvents={setInitialEvents}
+        calendarDispatch={calendarDispatch}
         scheduleStartDate={scheduleStartDate}
         scheduleEndDate={scheduleEndDate}
         setScheduleStartDate={setScheduleStartDate}

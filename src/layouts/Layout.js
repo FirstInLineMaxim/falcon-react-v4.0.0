@@ -200,7 +200,6 @@ import ContactDetails from 'components/app/support-desk/contact-details/ContactD
 import TicketsPreview from 'components/app/support-desk/tickets-preview/TicketsPreview';
 import QuickLinks from 'components/app/support-desk/quick-links/QuickLinks';
 import Reports from 'components/app/support-desk/reports/Reports';
-import MaximApp from 'MaximApp/MaximApp';
 
 const Layout = () => {
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;

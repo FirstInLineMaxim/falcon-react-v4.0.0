@@ -3,7 +3,7 @@ import React, { useContext, useRef } from 'react';
 import { Button, Col, Container, InputGroup, Row } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap/esm';
 import { WeatherContext } from './context/Context';
-import { ADD_CITY } from './redux_types/weatherTypes';
+import { ADD_CITY, REMOVE_CITY } from './redux_types/weatherTypes';
 import { toast } from 'react-toastify';
 import { Dropdown } from 'react-bootstrap';
 
@@ -51,8 +51,15 @@ export default function WeatherApp() {
   }
 
   async function submitNewCity(city) {
+    if (
+      weatherState.filter(e => e.city.toLowerCase() === city.toLowerCase())
+        .length > 0
+    ) {
+      return toast(
+        <span className="text-info text-center">Cant add same city Twice.</span>
+      );
+    }
     if (city === '') {
-      console.log('first');
       return toast(
         <span className="text-info text-center">
           Please enter a city First!
@@ -75,7 +82,9 @@ export default function WeatherApp() {
       console.log(error);
     }
   }
-  console.log(weatherState);
+  function removeCity(city) {
+    weatherDispatch({ type: REMOVE_CITY, payload: city });
+  }
   return (
     <>
       <InputGroup className="my-3">
@@ -98,12 +107,18 @@ export default function WeatherApp() {
       <Container fluid>
         <Row className="g-3">
           {weatherState.map((ele, i) => (
-            <Col key={1} md={6}>
+            <Col key={i} md={6} lg={4}>
               <Weather
                 key={i}
                 data={ele}
                 WeatherItems={
-                  <Dropdown.Item className="text-danger">Remove</Dropdown.Item>
+                  <Dropdown.Item
+                    data-city={ele.city}
+                    className="text-danger"
+                    onClick={e => removeCity(e.target.dataset.city)}
+                  >
+                    Remove
+                  </Dropdown.Item>
                 }
               />
             </Col>
