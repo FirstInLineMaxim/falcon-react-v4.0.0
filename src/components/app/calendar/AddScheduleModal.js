@@ -172,6 +172,7 @@ const AddScheduleModal = ({
 };
 
 AddScheduleModal.propTypes = {
+  calendarDispatch: PropTypes.func.isRequired,
   setIsOpenScheduleModal: PropTypes.func.isRequired,
   isOpenScheduleModal: PropTypes.bool.isRequired,
   setInitialEvents: PropTypes.func,

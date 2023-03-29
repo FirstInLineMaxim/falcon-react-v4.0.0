@@ -1,3 +1,5 @@
+import CreateEvent from 'components/app/events/create-an-event/CreateEvent';
+import EventDetail from 'components/app/events/event-detail/EventDetail';
 import Error404 from 'components/errors/Error404';
 import Error500 from 'components/errors/Error500';
 import Starter from 'components/pages/Starter';
@@ -13,10 +15,12 @@ export default function MaximLayout() {
   return (
     <>
       <Routes>
-        <Route exact path="/" element={<MaximLanding />} />
-        <Route element={<AppMainLayout />}>
+        {/* <Route exact path="/" element={<MaximLanding />} /> */}
+        <Route path="/" element={<AppMainLayout />}>
           <Route path="weather" element={<Starter />} />
           <Route path="dashboard" element={<AppDashboard />} />
+          <Route path="events/create-an-event" element={<CreateEvent />} />
+          <Route path="events/event-detail" element={<EventDetail />} />
         </Route>
         <Route element={<ErrorLayout />}>
           <Route path="errors/404" element={<Error404 />} />

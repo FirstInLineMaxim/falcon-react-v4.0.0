@@ -14,6 +14,7 @@ import NavbarTopDropDownMenus from 'components/navbar/top/NavbarTopDropDownMenus
 // import PurchaseCard from 'components/navbar/vertical/PurchaseCard';
 import bgNavbar from 'assets/img/generic/bg-navbar.png';
 import AppIcon from './common/AppIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const AppNavbarVertical = () => {
   const {
@@ -95,6 +96,7 @@ const AppNavbarVertical = () => {
                 {!route.labelDisable && (
                   <NavbarLabel label={capitalize(route.label)} />
                 )}
+                <FontAwesomeIcon icon={['fab', 'github']} />
                 <NavbarVerticalMenu routes={route.children} />
               </Fragment>
             ))}

@@ -53,6 +53,12 @@ export default function WeatherApp() {
     }
   }
 
+  function handleSubmit(e) {
+    if (e.key === 'Enter') {
+      submitNewCity(cityInput.current.value);
+    }
+    return;
+  }
   async function submitNewCity(city) {
     if (
       weatherState.filter(e => e.city.toLowerCase() === city.toLowerCase())
@@ -96,7 +102,7 @@ export default function WeatherApp() {
           placeholder="City"
           aria-label="City"
           aria-describedby="basic-addon2"
-          onSubmit={() => console.log('submited')}
+          onKeyDown={e => handleSubmit(e)}
         />
         <Button
           onClick={() => submitNewCity(cityInput.current.value)}

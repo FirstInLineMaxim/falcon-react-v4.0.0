@@ -1,3 +1,6 @@
+import { faAppStoreIos } from '@fortawesome/free-brands-svg-icons';
+import { faCloud } from '@fortawesome/free-solid-svg-icons';
+
 const appRoutes = {
   label: 'Dashboard',
   labelDisable: true,
@@ -5,53 +8,24 @@ const appRoutes = {
     {
       name: 'Apps',
       active: true,
-      icon: 'rocket',
+      icon: faAppStoreIos,
       children: [
         {
           name: 'Calendar',
-          to: '/dashboard',
+          to: 'dashboard',
           exact: true,
           active: true,
-          icon: 'calendar-alt'
-        },
-        {
-          name: 'Weather',
-          to: '/weather',
-          active: true
-        },
-        {
-          name: 'CRM',
-          to: '/dashboard/crm',
-          active: true
-        },
-        {
-          name: 'E Commerce',
-          to: '/dashboard/e-commerce',
-          active: true
-        },
-        {
-          name: 'LMS',
-          to: '/dashboard/lms',
-          active: true,
+          icon: 'calendar-alt',
           badge: {
             type: 'success',
             text: 'New'
           }
         },
         {
-          name: 'Management',
-          to: '/dashboard/project-management',
-          active: true
-        },
-        {
-          name: 'SaaS',
-          to: '/dashboard/saas',
-          active: true
-        },
-        {
-          name: 'Support desk',
-          to: '/dashboard/support-desk',
+          name: 'Weather',
+          to: 'weather',
           active: true,
+          icon: faCloud,
           badge: {
             type: 'success',
             text: 'New'
