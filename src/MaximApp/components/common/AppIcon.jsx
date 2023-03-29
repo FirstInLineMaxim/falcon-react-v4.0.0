@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import logo from '../../src/assets/img/app_icon.png';
-
+import AppContext from 'context/Context';
 const AppIcon = ({ at, width, className, textClass, ...rest }) => {
+  const { config } = useContext(AppContext);
+  console.log(config);
   return (
     <Link
       to="/"
@@ -26,7 +28,13 @@ const AppIcon = ({ at, width, className, textClass, ...rest }) => {
           className
         )}
       >
-        <img className="me-2 " src={logo} alt="Logo" width={width} />
+        <img
+          className="me-2 "
+          src={logo}
+          alt="Logo"
+          width={width}
+          style={config.isDark ? { filter: 'invert(1)' } : { filter: 'none' }}
+        />
         {/* <span className={classNames('font-sans-serif', textClass)}>falcon</span> */}
       </div>
     </Link>

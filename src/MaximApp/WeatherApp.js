@@ -94,6 +94,7 @@ export default function WeatherApp() {
   function removeCity(city) {
     weatherDispatch({ type: REMOVE_CITY, payload: city });
   }
+  function dragElement(e) {}
   return (
     <>
       <InputGroup className="my-3">
@@ -116,7 +117,7 @@ export default function WeatherApp() {
       <Container fluid>
         <Row className="g-3">
           {weatherState.map((ele, i) => (
-            <Col key={i} md={6} lg={4}>
+            <Col onMouseDown={e => dragElement(e)} key={i} md={6} lg={4}>
               <Weather
                 key={i}
                 data={ele}
