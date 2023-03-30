@@ -1,6 +1,7 @@
 import TotalOrder from 'MaximApp/components/TotalOrder';
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import placeholder from '../data/crypto.json';
 export default function Crypto() {
@@ -60,7 +61,7 @@ export default function Crypto() {
     ];
 
     const price = [...calculatedNumbers, USD.price];
-    return { name: entry.name, price, percent_change_1h };
+    return { name: entry.name, price, percent_change_1h, url: entry.slug };
   });
   return (
     <>
@@ -69,7 +70,15 @@ export default function Crypto() {
         <Row className="g-3">
           {displayData?.map((ele, i) => (
             <Col key={i} md={6} lg={6} xxl={4}>
-              <TotalOrder key={i} data={ele} />
+              <Link
+                className="text-decoration-none"
+                to={`https://coinmarketcap.com/currencies/${ele.url}/`}
+                data-toggle="tooltip"
+                data-placement="bottom"
+                title="click to coinmarketcap"
+              >
+                <TotalOrder key={i} data={ele} />
+              </Link>
             </Col>
           ))}
         </Row>
