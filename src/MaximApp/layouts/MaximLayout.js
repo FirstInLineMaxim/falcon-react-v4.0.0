@@ -5,6 +5,7 @@ import Error500 from 'components/errors/Error500';
 import Starter from 'components/pages/Starter';
 import ErrorLayout from 'layouts/ErrorLayout';
 import AppDashboard from 'MaximApp/pages/AppDashboard';
+import Crypto from 'MaximApp/pages/Crypto';
 import MaximLanding from 'MaximApp/pages/MaximLanding';
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -21,6 +22,7 @@ export default function MaximLayout() {
           <Route path="dashboard" element={<AppDashboard />} />
           <Route path="events/create-an-event" element={<CreateEvent />} />
           <Route path="events/event-detail" element={<EventDetail />} />
+          <Route path="crypto" element={<Crypto />} />
         </Route>
         <Route element={<ErrorLayout />}>
           <Route path="errors/404" element={<Error404 />} />

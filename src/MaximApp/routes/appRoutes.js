@@ -1,5 +1,5 @@
 import { faAppStoreIos } from '@fortawesome/free-brands-svg-icons';
-import { faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faCloud, faCoins } from '@fortawesome/free-solid-svg-icons';
 
 const appRoutes = {
   label: 'Dashboard',
@@ -26,6 +26,16 @@ const appRoutes = {
           to: 'weather',
           active: true,
           icon: faCloud,
+          badge: {
+            type: 'success',
+            text: 'New'
+          }
+        },
+        {
+          name: 'Crypto',
+          to: 'crypto',
+          active: true,
+          icon: faCoins,
           badge: {
             type: 'success',
             text: 'New'
