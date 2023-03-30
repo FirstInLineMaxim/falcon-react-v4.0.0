@@ -101,8 +101,9 @@ const TotalOrder = ({ data }) => {
       >
         <div>
           <h2 className="fw-normal text-700 mb-1 lh-1">
-            {parseFloat(price[price.length - 1]).toFixed(2)}
+            {parseFloat(price[price.length - 1]).toFixed(2)}$
           </h2>
+          <span> Last 24h </span>
           <Badge
             pill
             bg="200"
@@ -112,7 +113,7 @@ const TotalOrder = ({ data }) => {
               icon={getStyle(percent_change_1h).icon}
               className="me-1"
             />
-            13.6%
+            {parseFloat(percent_change_1h).toFixed(2)}%
           </Badge>
         </div>
         <div className="ps-0">

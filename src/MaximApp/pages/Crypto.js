@@ -1,5 +1,6 @@
 import TotalOrder from 'MaximApp/components/TotalOrder';
 import React from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 
 import placeholder from '../data/crypto.json';
 export default function Crypto() {
@@ -40,9 +41,15 @@ export default function Crypto() {
   //   }
   return (
     <>
-      {displayData.map((ele, i) => (
-        <TotalOrder key={i} data={ele} />
-      ))}
+      <Container fluid>
+        <Row className="g-3">
+          {displayData.map((ele, i) => (
+            <Col key={i} md={6} lg={6} xxl={4}>
+              <TotalOrder key={i} data={ele} />
+            </Col>
+          ))}
+        </Row>
+      </Container>
       {/* <TotalOrder data={[200000, 300000]} /> */}
     </>
   );
