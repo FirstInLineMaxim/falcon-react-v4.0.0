@@ -50,7 +50,7 @@ const CollapseItems = ({ route }) => {
 CollapseItems.propTypes = {
   route: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    icon: PropTypes.string,
+    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     children: PropTypes.array.isRequired,
     active: PropTypes.bool
   }).isRequired

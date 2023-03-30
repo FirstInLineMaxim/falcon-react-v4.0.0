@@ -27,7 +27,11 @@ const routeShape = {
   active: PropTypes.bool,
   name: PropTypes.string.isRequired,
   to: PropTypes.string,
-  icon: PropTypes.oneOfType([PropTypes.array, PropTypes.string])
+  icon: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.string,
+    PropTypes.object
+  ])
 };
 routeShape.children = PropTypes.arrayOf(PropTypes.shape(routeShape));
 NavbarVerticalMenuItem.propTypes = {

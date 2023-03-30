@@ -46,9 +46,8 @@ export default function Crypto() {
     } = USD;
     const calculatePrice = percent => {
       const difference = (USD.price / 100) * percent;
-      console.log({ difference });
+
       const total = USD.price - difference;
-      console.log({ total });
       return total;
     };
     const calculatedNumbers = [

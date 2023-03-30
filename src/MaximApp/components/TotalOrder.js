@@ -128,6 +128,6 @@ const TotalOrder = ({ data }) => {
   );
 };
 
-TotalOrder.propTypes = { data: PropTypes.array.isRequired };
+TotalOrder.propTypes = { data: PropTypes.object.isRequired };
 
 export default TotalOrder;

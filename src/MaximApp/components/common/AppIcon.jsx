@@ -6,7 +6,6 @@ import logo from '../../src/assets/img/app_icon.png';
 import AppContext from 'context/Context';
 const AppIcon = ({ at, width, className, textClass, ...rest }) => {
   const { config } = useContext(AppContext);
-  console.log(config);
   return (
     <Link
       to="/"
