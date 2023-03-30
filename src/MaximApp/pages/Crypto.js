@@ -49,9 +49,8 @@ export default function Crypto() {
           'X-CMC_PRO_API_KEY': `${process.env.REACT_APP_COIN_MARKET_API_KEY}`
         }
       });
-      const json = await data.json();
 
-      setData(json);
+      setData(data.data);
     } catch (error) {
       console.log(error);
     }
