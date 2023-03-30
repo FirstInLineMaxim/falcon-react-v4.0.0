@@ -64,7 +64,7 @@ export default function Crypto() {
   });
   return (
     <>
-      <h2>Today's Cryptocurrency Prices by Market Cap</h2>
+      <h2 className="display-5">Today's Cryptocurrency Prices by Market Cap</h2>
       <Container fluid>
         <Row className="g-3">
           {displayData?.map((ele, i) => (
