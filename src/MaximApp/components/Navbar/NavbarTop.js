@@ -95,8 +95,8 @@ const NavbarTopElements = ({
   navbarCollapsed
 }) => {
   const burgerMenuRef = useRef();
-  const allState = useSelector(state => state);
-  console.log(allState);
+  const { crypto, calendar } = useSelector(state => state);
+  console.log(calendar);
   return (
     <>
       <Navbar.Toggle
@@ -138,7 +138,7 @@ const NavbarTopElements = ({
           as="ul"
         >
           <Nav.Item as="li">
-            <SearchBox autoCompleteItem={autoCompleteInitialItem} />
+            <SearchBox autoCompleteItem={[...crypto, ...calendar]} />
           </Nav.Item>
         </Nav>
       )}

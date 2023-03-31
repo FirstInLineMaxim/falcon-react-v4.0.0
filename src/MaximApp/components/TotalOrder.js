@@ -69,7 +69,7 @@ const getOptions = (data, latestPercent) => ({
     left: '10px'
   }
 });
-const getStyle = data => {
+export const getStyle = data => {
   const isPositive = Math.sign(data);
   if (isPositive === 1) {
     return { icon: 'caret-up', text: 'text-primary' };

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Dropdown } from 'react-bootstrap';
+import { Form, Dropdown, Badge } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Fuse from 'fuse.js';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { isIterableArray } from 'helpers/utils';
 import Flex from 'components/common/Flex';
 import FalconCloseButton from 'components/common/FalconCloseButton';
 import SoftBadge from 'components/common/SoftBadge';
+import { getStyle } from '../TotalOrder';
 
 const MediaSearchContent = ({ item }) => {
   return (
@@ -42,13 +43,25 @@ const SearchBox = ({ autoCompleteItem }) => {
 
   const fuseJsOptions = {
     includeScore: true,
-    keys: ['title', 'text', 'breadCrumbTexts']
+    keys: ['name', 'title']
   };
 
   let searchResult = new Fuse(autoCompleteItem, fuseJsOptions)
     .search(searchInputValue)
     .map(item => item.item);
-
+  // console.log(searchResult);
+  const calendarDates = new Fuse(resultItem, {
+    keys: ['title']
+  })
+    .search(searchInputValue)
+    .map(item => item.item);
+  //Filters for items with the slug property and no empty searchInput
+  const cryptoItems = resultItem.filter(item => {
+    if (item.slug && searchInputValue !== '') {
+      return item;
+    }
+  });
+  // console.log('cryptoitems', cryptoItems);
   const recentlyBrowsedItems = resultItem.filter(
     item => item.catagories === 'recentlyBrowsedItems'
   );
@@ -118,7 +131,88 @@ const SearchBox = ({ autoCompleteItem }) => {
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <div className="scrollbar py-3" style={{ maxHeight: '24rem' }}>
-          {isIterableArray(recentlyBrowsedItems) && (
+          {isIterableArray(cryptoItems) && (
+            <>
+              <Dropdown.Header as="h6" className="px-x1 pt-0 pb-2 fw-medium">
+                Crypto Results
+              </Dropdown.Header>
+              {cryptoItems.map(item => (
+                <Dropdown.Item
+                  as={Link}
+                  to={`https://coinmarketcap.com/currencies/${item.slug}/`}
+                  className="fs--1 px-x1 py-1 hover-primary "
+                  key={item.id}
+                >
+                  <Flex alignItems="center " justifyContent={'between'}>
+                    <span>
+                      <FontAwesomeIcon
+                        icon="circle"
+                        className="me-2 text-300 fs--2"
+                      />
+                      <span>{item.name}</span>
+                    </span>
+                    <Badge
+                      pill
+                      bg="200"
+                      className={
+                        getStyle(item.quote.USD.percent_change_1h).text +
+                        ' fs--2'
+                      }
+                    >
+                      <FontAwesomeIcon
+                        icon={getStyle(item.quote.USD.percent_change_1h).icon}
+                        className="me-1"
+                      />
+                      {parseFloat(item.quote.USD.percent_change_1h).toFixed(2)}%
+                    </Badge>
+                  </Flex>
+                </Dropdown.Item>
+              ))}
+            </>
+          )}
+
+          {isIterableArray(calendarDates) && (
+            <>
+              <Dropdown.Header as="h6" className="px-x1 pt-0 pb-2 fw-medium">
+                Calendar Dates
+              </Dropdown.Header>
+              {calendarDates.map(item => {
+                const date = new Date(item.start);
+
+                const day = date.getDate().toString().padStart(2, '0');
+                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                const time = date.toLocaleTimeString([], {
+                  hour: '2-digit',
+                  minute: '2-digit'
+                });
+                const result = `${day}.${month}. - ${time}`;
+                return (
+                  <Dropdown.Item
+                    as={Link}
+                    to={item.url}
+                    className="fs--1 px-x1 py-1 hover-primary "
+                    key={item.id}
+                  >
+                    <Flex alignItems="center" justifyContent={'between'}>
+                      <div>
+                        <FontAwesomeIcon
+                          icon="circle"
+                          className="me-2 text-300 fs--2"
+                        />
+                        <span className={item.className + ' px-1 rounded'}>
+                          {item.title}
+                        </span>
+                      </div>
+                      <Badge pill bg="200" className="text-black">
+                        {result}
+                      </Badge>
+                    </Flex>
+                  </Dropdown.Item>
+                );
+              })}
+            </>
+          )}
+          {/* {isIterableArray(recentlyBrowsedItems) && (
             <>
               <Dropdown.Header as="h6" className="px-x1 pt-0 pb-2 fw-medium">
                 Recently Browsed
@@ -160,9 +254,9 @@ const SearchBox = ({ autoCompleteItem }) => {
                 <hr className="text-200 dark__text-900" />
               )}
             </>
-          )}
+          )} */}
 
-          {isIterableArray(suggestedFilters) && (
+          {/* {isIterableArray(suggestedFilters) && (
             <>
               <Dropdown.Header as="h6" className="px-x1 pt-0 pb-2 fw-medium">
                 Suggested Filter
@@ -215,7 +309,7 @@ const SearchBox = ({ autoCompleteItem }) => {
                 <MediaSearchContent item={item} key={item.id} />
               ))}
             </>
-          )}
+          )} */}
 
           {resultItem.length === 0 && (
             <p className="fs-1 fw-bold text-center mb-0">No Result Found.</p>
