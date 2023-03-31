@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import AppContext from 'context/Context';
 
 import NavbarTop from 'components/navbar/top/NavbarTop';
-import AppNavbarVertical from 'MaximApp/components/AppNavbarVertical';
+import NavbarVertical from 'MaximApp/components/NavbarVertical';
 
 const AppMainLayout = () => {
   const { hash, pathname } = useLocation();
@@ -33,7 +33,7 @@ const AppMainLayout = () => {
   return (
     <div className={'container'}>
       {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (
-        <AppNavbarVertical />
+        <NavbarVertical />
       )}
 
       <div className={'content pb-0'}>

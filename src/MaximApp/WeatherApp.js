@@ -85,7 +85,14 @@ export default function WeatherApp() {
         );
       }
       const newWeather = data && (await getWeather(data));
-
+      //Handels duplicates in the state
+      if (weatherState.find(ele => ele.city === newWeather.city)) {
+        return toast(
+          <span className="text-info text-center">
+            Cant add same city Twice.
+          </span>
+        );
+      }
       weatherDispatch({ type: ADD_CITY, payload: newWeather });
     } catch (error) {
       console.log(error);
@@ -94,7 +101,6 @@ export default function WeatherApp() {
   function removeCity(city) {
     weatherDispatch({ type: REMOVE_CITY, payload: city });
   }
-  function dragElement(e) {}
   return (
     <>
       <InputGroup className="my-3">
@@ -117,7 +123,7 @@ export default function WeatherApp() {
       <Container fluid>
         <Row className="g-3">
           {weatherState.map((ele, i) => (
-            <Col onMouseDown={e => dragElement(e)} key={i} md={6} lg={4}>
+            <Col key={i} md={6} lg={4}>
               <Weather
                 key={i}
                 data={ele}

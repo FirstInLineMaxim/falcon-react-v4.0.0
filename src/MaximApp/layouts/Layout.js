@@ -10,7 +10,7 @@ import MaximLanding from 'MaximApp/pages/MaximLanding';
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import AppMainLayout from './AppMainLayout';
+import AppMainLayout from './MainLayout';
 
 export default function MaximLayout() {
   return (
