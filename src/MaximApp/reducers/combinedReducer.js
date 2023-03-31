@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 import { calendarReducer } from './calendarReducer';
 import { weatherReducer } from './weatherReducer';
 
-const rootWeatherReducer = combineReducers({
+const rootReducer = combineReducers({
   weather: weatherReducer,
   calendar: calendarReducer
 });
-export default rootWeatherReducer;
+export default rootReducer;

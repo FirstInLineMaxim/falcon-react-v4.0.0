@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import AppContext from 'context/Context';
 
-import NavbarTop from 'components/navbar/top/NavbarTop';
 import NavbarVertical from 'MaximApp/components/NavbarVertical';
+import NavbarTop from 'MaximApp/components/Navbar/NavbarTop';
 
 const AppMainLayout = () => {
   const { hash, pathname } = useLocation();

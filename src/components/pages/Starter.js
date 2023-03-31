@@ -1,4 +1,4 @@
-import WeatherProvider from 'MaximApp/components/WeatherProvider';
+import WeatherProvider from 'MaximApp/providers/WeatherProvider';
 import WeatherApp from 'MaximApp/WeatherApp';
 import React from 'react';
 

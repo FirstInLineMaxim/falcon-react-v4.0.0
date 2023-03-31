@@ -3,15 +3,22 @@ import PropTypes from 'prop-types';
 import { Navbar, Nav } from 'react-bootstrap';
 import classNames from 'classnames';
 import AppContext from 'context/Context';
-import Logo from 'components/common/Logo';
-import NavbarTopDropDownMenus from 'components/navbar/top/NavbarTopDropDownMenus';
+import SearchBox from './SearchBox';
+import NavbarTopDropDownMenus from './NavbarTopDropDownMenus';
 import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
-import TopNavRightSideNavItem from 'components/navbar/top/TopNavRightSideNavItem';
-const AppNavBar = () => {
+import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
+import TopNavRightSideNavItem from './TopNavRightSideNavItem';
+import { useLocation } from 'react-router-dom';
+import AppIcon from 'MaximApp/components/common/AppIcon';
+
+const NavbarTop = () => {
   const {
     config: { showBurgerMenu, navbarPosition, navbarCollapsed },
     setConfig
   } = useContext(AppContext);
+
+  const { pathname } = useLocation();
+  const isChat = pathname.includes('chat');
 
   const [showDropShadow, setShowDropShadow] = useState(false);
 
@@ -110,7 +117,7 @@ const NavbarTopElements = ({
         </button>
       </Navbar.Toggle>
 
-      <Logo at="navbar-top" width={40} id="topLogo" />
+      <AppIcon at="navbar-top" width={80} id="topLogo" />
 
       {navbarPosition === 'top' || navbarPosition === 'combo' ? (
         <Navbar.Collapse
@@ -126,7 +133,11 @@ const NavbarTopElements = ({
           navbar
           className={`align-items-center d-none d-${topNavbarBreakpoint}-block`}
           as="ul"
-        ></Nav>
+        >
+          <Nav.Item as="li">
+            <SearchBox autoCompleteItem={autoCompleteInitialItem} />
+          </Nav.Item>
+        </Nav>
       )}
       <TopNavRightSideNavItem />
     </>
@@ -138,4 +149,4 @@ NavbarTopElements.propTypes = {
   handleBurgerMenu: PropTypes.func,
   navbarCollapsed: PropTypes.bool
 };
-export default AppNavBar;
+export default NavbarTop;
