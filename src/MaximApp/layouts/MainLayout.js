@@ -4,6 +4,7 @@ import AppContext from 'context/Context';
 
 import NavbarVertical from 'MaximApp/components/NavbarVertical';
 import NavbarTop from 'MaximApp/components/Navbar/NavbarTop';
+import RootProvider from 'MaximApp/providers/RootProvider';
 
 const AppMainLayout = () => {
   const { hash, pathname } = useLocation();
@@ -31,17 +32,19 @@ const AppMainLayout = () => {
   }, [pathname]);
 
   return (
-    <div className={'container'}>
-      {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (
-        <NavbarVertical />
-      )}
+    <RootProvider>
+      <div className={'container'}>
+        {(navbarPosition === 'vertical' || navbarPosition === 'combo') && (
+          <NavbarVertical />
+        )}
 
-      <div className={'content pb-0'}>
-        <NavbarTop />
-        {/*------ Main Routes ------*/}
-        <Outlet />
+        <div className={'content pb-0'}>
+          <NavbarTop />
+          {/*------ Main Routes ------*/}
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </RootProvider>
   );
 };
 
