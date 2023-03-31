@@ -1,6 +1,5 @@
 //Types
 import { ADD_CITY, REMOVE_CITY } from 'MaximApp/redux_types/weatherTypes';
-import { toast } from 'react-toastify';
 const initData = []; //Redux State
 
 export const weatherReducer = (state = initData, action) => {

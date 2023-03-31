@@ -6,7 +6,6 @@ import Starter from 'components/pages/Starter';
 import ErrorLayout from 'layouts/ErrorLayout';
 import AppDashboard from 'MaximApp/pages/AppDashboard';
 import Crypto from 'MaximApp/pages/Crypto';
-import MaximLanding from 'MaximApp/pages/MaximLanding';
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -16,7 +15,6 @@ export default function MaximLayout() {
   return (
     <>
       <Routes>
-        {/* <Route exact path="/" element={<MaximLanding />} /> */}
         <Route path="/" element={<AppMainLayout />}>
           <Route path="weather" element={<Starter />} />
           <Route path="dashboard" element={<AppDashboard />} />
