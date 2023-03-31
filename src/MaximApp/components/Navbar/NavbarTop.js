@@ -6,7 +6,7 @@ import AppContext from 'context/Context';
 import SearchBox from './SearchBox';
 import NavbarTopDropDownMenus from './NavbarTopDropDownMenus';
 import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
-import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
+// import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router-dom';
 import AppIcon from 'MaximApp/components/common/AppIcon';
@@ -96,7 +96,6 @@ const NavbarTopElements = ({
 }) => {
   const burgerMenuRef = useRef();
   const { crypto, calendar } = useSelector(state => state);
-  console.log(calendar);
   return (
     <>
       <Navbar.Toggle

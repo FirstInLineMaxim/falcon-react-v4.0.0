@@ -8,7 +8,7 @@ import Avatar from 'components/common/Avatar';
 import { isIterableArray } from 'helpers/utils';
 import Flex from 'components/common/Flex';
 import FalconCloseButton from 'components/common/FalconCloseButton';
-import SoftBadge from 'components/common/SoftBadge';
+// import SoftBadge from 'components/common/SoftBadge';
 import { getStyle } from '../TotalOrder';
 
 const MediaSearchContent = ({ item }) => {
@@ -61,22 +61,22 @@ const SearchBox = ({ autoCompleteItem }) => {
       return item;
     }
   });
-  // console.log('cryptoitems', cryptoItems);
-  const recentlyBrowsedItems = resultItem.filter(
-    item => item.catagories === 'recentlyBrowsedItems'
-  );
+  // // console.log('cryptoitems', cryptoItems);
+  // const recentlyBrowsedItems = resultItem.filter(
+  //   item => item.catagories === 'recentlyBrowsedItems'
+  // );
 
-  const suggestedFilters = resultItem.filter(
-    item => item.catagories === 'suggestedFilters'
-  );
+  // const suggestedFilters = resultItem.filter(
+  //   item => item.catagories === 'suggestedFilters'
+  // );
 
-  const suggestionFiles = resultItem.filter(
-    item => item.catagories === 'suggestionFiles'
-  );
+  // const suggestionFiles = resultItem.filter(
+  //   item => item.catagories === 'suggestionFiles'
+  // );
 
-  const suggestionMembers = resultItem.filter(
-    item => item.catagories === 'suggestionMembers'
-  );
+  // const suggestionMembers = resultItem.filter(
+  //   item => item.catagories === 'suggestionMembers'
+  // );
 
   const toggle = () => setDropdownOpen(!dropdownOpen);
 
