@@ -23,7 +23,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 const Calendar = () => {
-  const calendarState = useSelector(state => state);
+  const calendarState = useSelector(state => state.calendar);
   const calendarDispatch = useDispatch();
   const {
     config: { isRTL }

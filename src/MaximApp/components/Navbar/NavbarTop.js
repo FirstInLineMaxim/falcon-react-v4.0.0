@@ -10,6 +10,7 @@ import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router-dom';
 import AppIcon from 'MaximApp/components/common/AppIcon';
+import { useSelector } from 'react-redux';
 
 const NavbarTop = () => {
   const {
@@ -94,6 +95,8 @@ const NavbarTopElements = ({
   navbarCollapsed
 }) => {
   const burgerMenuRef = useRef();
+  const allState = useSelector(state => state);
+  console.log(allState);
   return (
     <>
       <Navbar.Toggle

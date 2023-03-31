@@ -5,9 +5,9 @@ import React from 'react';
 export default function AppDashboard() {
   return (
     <>
-      <CalendarProvider>
-        <Calendar />
-      </CalendarProvider>
+      {/* <CalendarProvider> */}
+      <Calendar />
+      {/* </CalendarProvider> */}
     </>
   );
 }
