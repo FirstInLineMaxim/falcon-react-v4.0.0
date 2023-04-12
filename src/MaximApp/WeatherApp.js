@@ -1,5 +1,5 @@
 import Weather from 'components/dashboards/default/Weather';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Col, Container, InputGroup, Row } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap/esm';
 import { ADD_CITY, REMOVE_CITY } from './redux_types/weatherTypes';
@@ -7,14 +7,16 @@ import { toast } from 'react-toastify';
 import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-
+import Fuse from 'fuse.js';
 export default function WeatherApp() {
   const cityInput = useRef();
+
   const weatherApiKey = process.env.REACT_APP_OPEN_WEATHER_API_KEY;
   // const { weatherState, weatherDispatch } = useContext(WeatherContext);
   const weatherState = useSelector(state => state);
   const weatherDispatch = useDispatch();
   //Fetch to get city Name,lat,lon
+
   async function getCord(city) {
     try {
       const data = await fetch(
@@ -31,6 +33,43 @@ export default function WeatherApp() {
       console.error(error);
     }
   }
+  //Creating Lookup for Various Cities
+  const [searchInputValue, setSearchInputValue] = useState('Berlin');
+  const [autoCompleteItem, setAutoCompleteItem] = useState([]);
+  //This React hook helps to limit that the component is re-rendered too many times.
+  const debouncedValue = useAsyncDebounce(searchInputValue, 500);
+  async function awaitCity(input) {
+    const lookup = `https://openweathermap.org/data/2.5/find?&appid=d3085dc00e744cef703a6ec04657f8d8https://openweathermap.org/data/2.5/find?callback=jQuery19101502834364540495_1681306893651&q=${input}&type=like&sort=population&cnt=30&appid=439d4b804bc8187953eb36d2a8c26a02&_=1681306893653`;
+    try {
+      const json = await fetch(lookup, {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          // 'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer' // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      });
+      const data = await json.json();
+      console.log(data);
+
+      setAutoCompleteItem(data.list);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  const fuseJsOptions = {
+    keys: ['name']
+  };
+  let searchResult = new Fuse(autoCompleteItem, fuseJsOptions)
+    .search(searchInputValue)
+    .map(item => item.item);
+  console.log(searchResult);
+
+  //
 
   async function getWeather({ lat, lon, city }) {
     try {
@@ -109,6 +148,7 @@ export default function WeatherApp() {
           placeholder="City"
           aria-label="City"
           aria-describedby="basic-addon2"
+          onChange={e => setSearchInputValue(e.target.value)}
           onKeyDown={e => handleSubmit(e)}
         />
         <Button
