@@ -22,9 +22,10 @@ export default function WeatherApp() {
   const weatherState = useSelector(state => state);
   const weatherDispatch = useDispatch();
   //Creating Lookup for Various Cities
-  const [searchInputValue, setSearchInputValue] = useState(null);
+  const [searchInputValue, setSearchInputValue] = useState('');
   const [autoCompleteItem, setAutoCompleteItem] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
+
   //This React hook helps to limit that the component is re-rendered too many times.
   const debouncedValue = useDebounce(searchInputValue, 500);
 
@@ -34,6 +35,7 @@ export default function WeatherApp() {
    *
    */
   async function awaitCity(input) {
+    console.log('awaitCity');
     setLoading(true);
     const lookup = `https://openweathermap.org/data/2.5/find?&q=${input}&type=like&sort=population&cnt=30&appid=439d4b804bc8187953eb36d2a8c26a02&_=1681306893654`;
     try {
@@ -51,11 +53,11 @@ export default function WeatherApp() {
       });
       const data = await json.json();
 
-      setAutoCompleteItem(data.list);
+      setAutoCompleteItem(data?.list);
       setLoading(false);
-      return;
     } catch (error) {
-      console.error(error);
+      setLoading(false);
+      console.error({ error });
     }
   }
 
@@ -66,29 +68,24 @@ export default function WeatherApp() {
    * {@link getWeather}
    */
   async function submitNewCity(city) {
-    if (city === '') {
+    console.log('submitNewCity');
+    // Dupplicates
+    if (
+      weatherState.some(
+        ele =>
+          ele.city.toLowerCase() === city.city.toLowerCase() &&
+          ele.coords.lat === city.lat &&
+          ele.coords.lon === city.lon
+      )
+    ) {
       return toast(
-        <span className="text-info text-center">
-          Please enter a city First!
-        </span>
+        <span className="text-info text-center">Cant add same city Twice.</span>
       );
     }
     try {
       const newWeather = await getWeather(city);
       //Handels duplicates in the state
-      if (
-        weatherState.find(
-          ele =>
-            ele.city === newWeather.city &&
-            ele.coords.lon === newWeather.coords.lon
-        )
-      ) {
-        return toast(
-          <span className="text-info text-center">
-            Cant add same city Twice.
-          </span>
-        );
-      }
+
       weatherDispatch({ type: ADD_CITY, payload: newWeather });
     } catch (error) {
       console.log(error);
@@ -100,6 +97,14 @@ export default function WeatherApp() {
    * @returns
    */
   async function getWeather({ lat, lon, city }) {
+    console.log('getWeather');
+    if (
+      weatherState.find(
+        ele =>
+          ele.city === city && ele.coords.lon && lon && ele.coords.lat === lat
+      )
+    )
+      return;
     try {
       const data = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${weatherApiKey}`
@@ -124,13 +129,21 @@ export default function WeatherApp() {
   }
   function handleSubmit(e) {
     if (e.key === 'Enter') {
-      const item = searchResult[0];
       e.preventDefault();
-      submitNewCity({
-        lat: item.coord.lat,
-        lon: item.coord.lon,
-        city: item.name
-      });
+      if (searchInputValue === '') {
+        return toast(
+          <span className="text-info text-center">
+            Please enter a city First!
+          </span>
+        );
+      }
+      const item = searchResult[0];
+      item &&
+        submitNewCity({
+          lat: item.coord.lat,
+          lon: item.coord.lon,
+          city: item.name
+        });
     }
     return;
   }
@@ -139,12 +152,12 @@ export default function WeatherApp() {
   }
   //Effect witch only gets run after an Timeout. Awaits user end of Typing
   useEffect(() => {
-    if (searchInputValue) awaitCity(searchInputValue);
+    if (!searchInputValue == '') awaitCity(searchInputValue);
   }, [debouncedValue]);
 
   //Effect to set the Search Result
   useEffect(() => {
-    if (searchInputValue) {
+    if (!searchInputValue == '') {
       const fuseJsOptions = {
         keys: ['name']
       };
@@ -156,7 +169,7 @@ export default function WeatherApp() {
   }, [autoCompleteItem]);
   return (
     <>
-      <Dropdown onToggle={toggle} className="search-box mb-4">
+      <Dropdown onToggle={toggle} className="search-box ">
         <Dropdown.Toggle
           as="div"
           data-toggle="dropdown"
@@ -255,7 +268,7 @@ export default function WeatherApp() {
       </Dropdown>
       <Container fluid>
         <Row className="g-3">
-          {weatherState.map((ele, i) => (
+          {weatherState?.map((ele, i) => (
             <Col key={i} md={6} lg={4}>
               <Weather
                 key={i}

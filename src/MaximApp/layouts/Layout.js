@@ -16,7 +16,9 @@ import Loader from 'MaximApp/components/Loader';
 
 const Crypto = lazy(() => import('MaximApp/pages/Crypto'));
 const Weather = lazy(() => import('components/pages/Starter'));
-const Calendar = lazy(() => import('MaximApp/pages/AppDashboard'));
+const Calendar = lazy(() =>
+  import('../../components/app/calendar/Calendar.js')
+);
 export default function MaximLayout() {
   return (
     <>
