@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { Suspense, useContext, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import AppContext from 'context/Context';
 
 import NavbarVertical from 'MaximApp/components/NavbarVertical';
 import NavbarTop from 'MaximApp/components/Navbar/NavbarTop';
 import RootProvider from 'MaximApp/providers/RootProvider';
+import Loader from 'MaximApp/components/Loader';
 
 const AppMainLayout = () => {
   const { hash, pathname } = useLocation();
@@ -41,7 +42,9 @@ const AppMainLayout = () => {
         <div className={'content pb-0'}>
           <NavbarTop />
           {/*------ Main Routes ------*/}
-          <Outlet />
+          <Suspense fallback={<Loader />}>
+            <Outlet />
+          </Suspense>
         </div>
       </div>
     </RootProvider>

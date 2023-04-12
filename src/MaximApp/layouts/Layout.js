@@ -11,17 +11,29 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import AppMainLayout from './MainLayout';
 import { Spinner } from 'react-bootstrap';
+import Flex from 'components/common/Flex';
+import Loader from 'MaximApp/components/Loader';
 
 const Crypto = lazy(() => import('MaximApp/pages/Crypto'));
-const Starter = lazy(() => import('components/pages/Starter'));
+const Weather = lazy(() => import('components/pages/Starter'));
 const Calendar = lazy(() => import('MaximApp/pages/AppDashboard'));
 export default function MaximLayout() {
   return (
     <>
-      <Suspense fallback={<Spinner />}>
+      <Suspense
+        fallback={
+          <Flex
+            justifyContent={'center'}
+            alignItems={'center'}
+            style={{ height: '94vh' }}
+          >
+            <Spinner />
+          </Flex>
+        }
+      >
         <Routes>
           <Route path="/" element={<AppMainLayout />}>
-            <Route path="weather" element={<Starter />} />
+            <Route path="weather" element={<Weather />} />
             <Route path="dashboard" element={<Calendar />} />
             <Route path="events/create-an-event" element={<CreateEvent />} />
             <Route path="events/event-detail" element={<EventDetail />} />
