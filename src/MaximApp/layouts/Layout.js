@@ -1,24 +1,28 @@
-import CreateEvent from 'components/app/events/create-an-event/CreateEvent';
-import EventDetail from 'components/app/events/event-detail/EventDetail';
-import Error404 from 'components/errors/Error404';
-import Error500 from 'components/errors/Error500';
-// import Starter from 'components/pages/Starter';
-import ErrorLayout from 'layouts/ErrorLayout';
-// import AppDashboard from 'MaximApp/pages/AppDashboard';
-// import Crypto from 'MaximApp/pages/Crypto';
 import React, { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import AppMainLayout from './MainLayout';
-import { Spinner } from 'react-bootstrap';
-import Flex from 'components/common/Flex';
-import Loader from 'MaximApp/components/Loader';
+
+//Components
+const AppMainLayout = lazy(() => import('./MainLayout'));
+const CreateEvent = lazy(() =>
+  import('components/app/events/create-an-event/CreateEvent')
+);
+const EventDetail = lazy(() =>
+  import('components/app/events/event-detail/EventDetail')
+);
+const Error404 = lazy(() => import('components/errors/Error404'));
+const Error500 = lazy(() => import('components/errors/Error500'));
+const ErrorLayout = lazy(() => import('layouts/ErrorLayout'));
+const Flex = lazy(() => import('components/common/Flex'));
 
 const Crypto = lazy(() => import('MaximApp/pages/Crypto'));
 const Weather = lazy(() => import('components/pages/Starter'));
 const Calendar = lazy(() =>
   import('../../components/app/calendar/Calendar.js')
 );
+import { Spinner } from 'react-bootstrap';
+import Loader from 'MaximApp/components/Loader';
+
 export default function MaximLayout() {
   return (
     <>
